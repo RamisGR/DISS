@@ -63,7 +63,7 @@ function toggleTheme() {
         themeButton.innerText = "Светлая тема";
         localStorage.setItem("theme", "dark");
     } else {
-        themeButton.innerText = "Тёмная тема";
+        themeButton.innerText = "Сменить тему";
         localStorage.setItem("theme", "light");
     }
 }
