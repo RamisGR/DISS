@@ -35,7 +35,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s;
 }
 
 #theme-toggle:hover {
@@ -58,12 +58,17 @@ body {
     height: 40px;
     display: block;
     margin: 0 auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+#telegram-link img:hover {
+    transform: scale(1.1);
 }
 
 /* Контейнер */
 .container {
     max-width: 500px;
-    margin: auto;
+    margin: 80px auto 20px; /* Добавлен верхний отступ для отделения от фиксированных элементов */
     padding: 20px;
     border-radius: 10px;
 }
