@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прогресс Диссертации</title>
+    <title>Прогресс проектов</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Прогресс диссертации</h1>
+        <h1>Прогресс моих проектов</h1>
 
         <div class="progress-container">
             <div class="progress-label">Сайт-портфолио <span class="percent">70%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="70"></div></div>
+            <canvas class="progress-canvas" data-progress="70"></canvas>
         </div>
 
         <div class="progress-container">
             <div class="progress-label">Telegram-бот <span class="percent">40%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="40"></div></div>
+            <canvas class="progress-canvas" data-progress="40"></canvas>
         </div>
 
         <div class="progress-container">
             <div class="progress-label">Учебный курс <span class="percent">90%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="90"></div></div>
+            <canvas class="progress-canvas" data-progress="90"></canvas>
         </div>
 
-        <button onclick="updateProgress()">Обновить прогресс</button>
         <button onclick="toggleTheme()">Сменить тему</button>
     </div>
 
