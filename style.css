@@ -28,12 +28,18 @@ body {
     position: fixed;
     top: 15px;
     right: 15px;
-    padding: 10px;
-    font-size: 18px;
-    background: none;
+    padding: 10px 15px;
+    background: #4caf50;
+    color: white;
+    font-size: 16px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+}
+
+#theme-toggle:hover {
+    background: #45a049;
 }
 
 /* Telegram иконка */
@@ -52,6 +58,14 @@ body {
     height: 40px;
     display: block;
     margin: 0 auto;
+}
+
+/* Контейнер */
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 /* Прогресс-бары */
