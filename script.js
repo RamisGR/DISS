@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.add("dark-mode");
         document.getElementById("theme-toggle").innerText = "Светлая тема";
     } else {
-        document.getElementById("theme-toggle").innerText = "Тёмная тема";
+        document.getElementById("theme-toggle").innerText = "Сменить тему";
     }
 
     // Функция для расчёта суммарного прогресса в заданном контейнере
