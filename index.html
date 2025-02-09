@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогресс проектов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+        .progress-container {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .progress-label {
+            font-weight: bold;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+            margin-top: 5px;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #4caf50, #8bc34a);
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Прогресс моих проектов</h1>
+
+    <div class="progress-container">
+        <div class="progress-label">Проект 1: Сайт-портфолио (70%)</div>
+        <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-label">Проект 2: Telegram-бот (40%)</div>
+        <div class="progress-bar"><div class="progress" style="width: 40%;"></div></div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-label">Проект 3: Учебный курс (90%)</div>
+        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+    </div>
+
+</body>
+</html>
