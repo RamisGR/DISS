@@ -1,22 +1,16 @@
 // Анимация прогресса при загрузке
 document.addEventListener("DOMContentLoaded", function () {
     let totalProgress = 0;
-    let progressBars = document.querySelectorAll(".progress");
 
-    if (progressBars.length === 0) return; // Защита от пустых элементов
-
-    // Подсчет суммарного прогресса
-    progressBars.forEach(bar => {
-        let progressValue = parseInt(bar.getAttribute("data-progress"), 10);
+    document.querySelectorAll(".progress").forEach(bar => {
+        let progressValue = parseInt(bar.getAttribute("data-progress"));
         bar.style.width = progressValue + "%";
         totalProgress += progressValue;
     });
 
-    // Новый расчет процентов и страниц (с ограничением до 100%)
-    let progressPercent = Math.min(Math.round((totalProgress / 600) * 100), 100);
-    let pageCount = Math.round((totalProgress / 600) * 120);
+    let progressPercent = Math.round(totalProgress / 6);
+    let pageCount = Math.round((totalProgress / 100) * 120);
 
-    // Обновление текста итогового прогресса
     document.getElementById("dissertation-progress").innerText = `Диссертация готова на ${progressPercent}%`;
     document.getElementById("page-count").innerText = `${pageCount} из 120 стр.`;
 
@@ -32,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     lines.forEach((line, index) => {
         let chapterProgress = document.querySelectorAll(".progress")[index].getAttribute("data-progress");
-        if (parseInt(chapterProgress, 10) > 0) {
+        if (parseInt(chapterProgress) > 0) {
             line.classList.add("filled");
         }
     });
