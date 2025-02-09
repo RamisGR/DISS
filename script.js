@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return total;
     }
 
-    // Расчёт для диссертации (максимум: 600, страниц – 120)
+    // Расчёт суммарного прогресса для диссертации (максимум: 600, страниц – 120)
     const dissertationContainer = document.getElementById("dissertation-progress").parentElement;
     const dissertationTotal = calculateTotalProgress(dissertationContainer);
     const dissertationPercent = Math.min(Math.round((dissertationTotal / 600) * 100), 100);
