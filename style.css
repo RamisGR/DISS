@@ -43,23 +43,16 @@ body {
     justify-content: space-between;
 }
 
-.progress-bar {
+/* Канвас для анимации шкалы */
+.progress-canvas {
     width: 100%;
+    height: 20px;
     background-color: var(--bar-bg);
     border-radius: 10px;
-    overflow: hidden;
-    height: 20px;
-    margin-top: 5px;
+    display: block;
 }
 
-.progress {
-    height: 100%;
-    background: var(--bar-fill);
-    width: 0%;
-    transition: width 1s ease-in-out;
-}
-
-/* Кнопки */
+/* Кнопка переключения темы */
 button {
     padding: 10px 15px;
     margin-top: 15px;
