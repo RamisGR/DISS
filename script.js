@@ -1,25 +1,33 @@
 // Анимация прогресса при загрузке
 document.addEventListener("DOMContentLoaded", function () {
-    let progressBars = document.querySelectorAll(".progress");
-
+    const progressBars = document.querySelectorAll(".progress");
     if (progressBars.length === 0) return;
 
     progressBars.forEach(bar => {
-        let progressValue = parseInt(bar.getAttribute("data-progress"), 10);
+        const progressValue = parseInt(bar.getAttribute("data-progress"), 10);
         bar.style.width = progressValue + "%";
     });
 
+    // Установка темы по сохранённому значению в localStorage
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
-        document.getElementById("theme-toggle").innerText = "Сменить тему";
+        document.getElementById("theme-toggle").innerText = "Светлая тема";
+    } else {
+        document.getElementById("theme-toggle").innerText = "Тёмная тема";
     }
 });
 
 function toggleTheme() {
-    let body = document.body;
-    let themeButton = document.getElementById("theme-toggle");
+    const body = document.body;
+    const themeButton = document.getElementById("theme-toggle");
 
     body.classList.toggle("dark-mode");
 
-    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+    if (body.classList.contains("dark-mode")) {
+        themeButton.innerText = "Светлая тема";
+        localStorage.setItem("theme", "dark");
+    } else {
+        themeButton.innerText = "Тёмная тема";
+        localStorage.setItem("theme", "light");
+    }
 }
