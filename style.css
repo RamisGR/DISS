@@ -1,112 +1,50 @@
-/* Основные стили */
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 40px;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* Светлая и тёмная тема */
-:root {
-    --bg-color: #ffffff;
-    --text-color: #333;
-    --bar-bg: #ddd;
-    --bar-fill: linear-gradient(to right, #4caf50, #8bc34a);
-}
-
-.dark-mode {
-    --bg-color: #181818;
-    --text-color: #f0f0f0;
-    --bar-bg: #333;
-    --bar-fill: linear-gradient(to right, #76ff03, #b2ff59);
-}
-
-/* Контейнер */
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-/* Прогресс-бары */
-.progress-container {
-    margin: 20px 0;
-    text-align: left;
-}
-
-.progress-label {
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-}
-
-.progress-bar {
-    width: 100%;
-    background-color: var(--bar-bg);
-    border-radius: 10px;
-    overflow: hidden;
-    height: 20px;
-    margin-top: 5px;
-}
-
-.progress {
-    height: 100%;
-    background: var(--bar-fill);
-    width: 0%;
-    transition: width 1s ease-in-out;
-}
-
 /* Шаговая шкала */
 .step-progress {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
 }
 
-.step {
-    width: 20px;
-    height: 20px;
-    background: #ddd;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 20px;
-    transition: background 0.3s;
-}
-
+/* Линии между шагами */
 .line {
     flex-grow: 1;
     height: 4px;
     background: #ddd;
     transition: background 0.3s;
+    margin: 0 5px; /* Уменьшаем отступ */
 }
 
-.active {
-    background: #4caf50;
+/* Точки (шаги) */
+.step {
+    width: 25px;
+    height: 25px;
+    background: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 25px;
+    transition: background 0.3s;
+    position: relative;
 }
 
-.filled {
-    background: #4caf50;
-}
-
-/* Кнопка */
-button {
-    padding: 10px 15px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* Заполненные шаги */
+.step.active {
     background: #4caf50;
     color: white;
-    font-size: 16px;
-    transition: 0.3s;
 }
 
-button:hover {
-    background: #45a049;
+/* Подписи под шагами */
+.step::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 30px;
+    font-size: 12px;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
 }
