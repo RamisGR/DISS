@@ -17,17 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let pageCount = Math.round((totalProgress / 600) * 120);
 
     // Обновление текста итогового прогресса
-    let progressElement = document.getElementById("dissertation-progress");
-    let pageCountElement = document.getElementById("page-count");
+    document.getElementById("dissertation-progress").innerText = `Диссертация готова на ${progressPercent}%`;
+    document.getElementById("page-count").innerText = `${pageCount} из 120 стр.`;
 
-    if (progressElement) {
-        progressElement.innerText = `Диссертация готова на ${progressPercent}%`;
-    }
-    if (pageCountElement) {
-        pageCountElement.innerText = `${pageCount} из 120 стр.`;
-    }
-
-    // Заполнение шагов (активных точек)
+    // Заполнение шагов
     let steps = document.querySelectorAll(".step");
     let lines = document.querySelectorAll(".line");
 
@@ -37,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Заполнение линий между шагами
     lines.forEach((line, index) => {
         let chapterProgress = document.querySelectorAll(".progress")[index].getAttribute("data-progress");
         if (parseInt(chapterProgress, 10) > 0) {
