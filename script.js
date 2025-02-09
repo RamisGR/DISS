@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         totalProgress += progressValue;
     });
 
-    let progressPercent = Math.round(totalProgress / 6);
-    let pageCount = Math.round((totalProgress / 100) * 120);
+    let progressPercent = Math.round((totalProgress / 600) * 100);
+    let pageCount = Math.round((totalProgress / 600) * 120);
 
     document.getElementById("dissertation-progress").innerText = `Диссертация готова на ${progressPercent}%`;
     document.getElementById("page-count").innerText = `${pageCount} из 120 стр.`;
