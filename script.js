@@ -6,13 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Функция обновления прогресса
-function updateProgress() {
-    document.querySelectorAll(".progress").forEach(bar => {
-        let newValue = Math.floor(Math.random() * 100) + 1;
-        bar.style.width = newValue + "%";
-        bar.parentElement.previousElementSibling.querySelector(".percent").innerText = newValue + "%";
-    });
+
 }
 
 // Переключение светлой/тёмной темы
