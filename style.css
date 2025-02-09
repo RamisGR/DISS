@@ -1,0 +1,77 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 40px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Светлая и тёмная тема */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --bar-bg: #ddd;
+    --bar-fill: linear-gradient(to right, #4caf50, #8bc34a);
+}
+
+.dark-mode {
+    --bg-color: #181818;
+    --text-color: #f0f0f0;
+    --bar-bg: #333;
+    --bar-fill: linear-gradient(to right, #76ff03, #b2ff59);
+}
+
+/* Контейнер */
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Прогресс-бары */
+.progress-container {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.progress-label {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: var(--bar-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.progress {
+    height: 100%;
+    background: var(--bar-fill);
+    width: 0%;
+    transition: width 1s ease-in-out;
+}
+
+/* Кнопки */
+button {
+    padding: 10px 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #4caf50;
+    color: white;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #45a049;
+}
