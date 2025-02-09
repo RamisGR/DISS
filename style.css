@@ -1,3 +1,8 @@
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+
 /* Основные стили */
 body {
     font-family: Arial, sans-serif;
@@ -23,13 +28,22 @@ body {
     --bar-fill: linear-gradient(to right, #76ff03, #b2ff59);
 }
 
-/* Кнопка смены темы */
-#theme-toggle {
+/* Верхняя панель (Top Bar) */
+#top-bar {
     position: fixed;
     top: 15px;
-    right: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Кнопка смены темы (серый фон) */
+#theme-toggle {
     padding: 10px 15px;
-    background: #4caf50;
+    background: #808080;
     color: white;
     font-size: 16px;
     border: none;
@@ -39,14 +53,11 @@ body {
 }
 
 #theme-toggle:hover {
-    background: #45a049;
+    background: #696969;
 }
 
-/* Telegram иконка */
+/* Иконка Telegram */
 #telegram-link {
-    position: fixed;
-    top: 15px;
-    left: 15px;
     text-align: center;
     text-decoration: none;
     color: var(--text-color);
@@ -65,12 +76,13 @@ body {
     transform: scale(1.1);
 }
 
-/* Контейнер */
+/* Контейнер для блоков прогресса */
 .container {
     max-width: 500px;
-    margin: 80px auto 20px; /* Добавлен верхний отступ для отделения от фиксированных элементов */
+    margin: 120px auto 20px;
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Прогресс-бары */
