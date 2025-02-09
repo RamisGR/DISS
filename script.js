@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.add("dark-mode");
         document.getElementById("theme-toggle").innerText = "Светлая тема";
     } else {
-        document.getElementById("theme-toggle").innerText = "Сменить тему";
+        document.getElementById("theme-toggle").innerText = "Тёмная тема";
     }
 
     // Функция для расчёта суммарного прогресса в заданном контейнере
@@ -63,7 +63,7 @@ function toggleTheme() {
         themeButton.innerText = "Светлая тема";
         localStorage.setItem("theme", "dark");
     } else {
-        themeButton.innerText = "Сменить тему";
+        themeButton.innerText = "Тёмная тема";
         localStorage.setItem("theme", "light");
     }
 }
