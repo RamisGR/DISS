@@ -8,6 +8,15 @@
 </head>
 <body>
 
+    <!-- Иконка Telegram -->
+    <a href="https://t.me/ramgade01" target="_blank" id="telegram-link">
+        <img src="telegram.png" alt="Telegram">
+        <p>Связаться</p>
+    </a>
+
+    <!-- Кнопка смены темы -->
+    <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
+
     <!-- Прогресс диссертации -->
     <div class="container">
         <h1>Прогресс диссертации</h1>
@@ -32,19 +41,8 @@
             <div class="progress-bar"><div class="progress" data-progress="30"></div></div>
         </div>
 
-        <div class="progress-container">
-            <div class="progress-label">Глава 4. Практическое применение результатов <span class="percent">30%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="30"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Глава 5. Выбор конфигурации устройства <span class="percent">15%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="15"></div></div>
-        </div>
-
         <h2 id="dissertation-progress">Диссертация готова на 0%</h2>
         <p id="page-count">0 из 120 стр.</p>
-
         <p id="status-text">Сейчас выполняется: Глава 3 - изучение задания валидной расчётной модели</p>
     </div>
 
@@ -57,33 +55,9 @@
             <div class="progress-bar"><div class="progress" data-progress="90"></div></div>
         </div>
 
-        <div class="progress-container">
-            <div class="progress-label">Введение <span class="percent">20%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="20"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Методы и материалы <span class="percent">20%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="20"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Результаты <span class="percent">30%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="30"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Обсуждение и заключение <span class="percent">10%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="10"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Библиографический список <span class="percent">60%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="60"></div></div>
-        </div>
-
         <h2 id="article1-progress">Статья №1 готова на 0%</h2>
         <p id="article1-page-count">0 из 120 стр.</p>
+        <p id="status-text">Сейчас выполняется: Методы и материалы - исследование данных</p>
     </div>
 
     <!-- Прогресс статьи №2 -->
@@ -95,35 +69,9 @@
             <div class="progress-bar"><div class="progress" data-progress="90"></div></div>
         </div>
 
-        <div class="progress-container">
-            <div class="progress-label">Введение <span class="percent">20%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="20"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Методы и материалы <span class="percent">20%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="20"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Результаты <span class="percent">30%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="30"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Обсуждение и заключение <span class="percent">10%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="10"></div></div>
-        </div>
-
-        <div class="progress-container">
-            <div class="progress-label">Библиографический список <span class="percent">60%</span></div>
-            <div class="progress-bar"><div class="progress" data-progress="60"></div></div>
-        </div>
-
         <h2 id="article2-progress">Статья №2 готова на 0%</h2>
         <p id="article2-page-count">0 из 120 стр.</p>
-
-        <button onclick="toggleTheme()">Сменить тему</button>
+        <p id="status-text">Сейчас выполняется: Результаты - подготовка графиков</p>
     </div>
 
     <script src="script.js"></script>
