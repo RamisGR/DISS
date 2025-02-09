@@ -23,12 +23,35 @@ body {
     --bar-fill: linear-gradient(to right, #76ff03, #b2ff59);
 }
 
-/* Контейнер */
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
+/* Кнопка смены темы */
+#theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Telegram иконка */
+#telegram-link {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+#telegram-link img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Прогресс-бары */
@@ -57,21 +80,4 @@ body {
     background: var(--bar-fill);
     width: 0%;
     transition: width 1s ease-in-out;
-}
-
-/* Кнопка */
-button {
-    padding: 10px 15px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background: #4caf50;
-    color: white;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #45a049;
 }
