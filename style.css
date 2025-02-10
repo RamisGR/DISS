@@ -64,8 +64,8 @@ body {
 }
 
 #vk-link img {
-  width: 36px;
-  height: 36px;
+  width: 37px;
+  height: 37px;
   object-fit: contain;
   transition: transform 0.2s ease-in-out;
 }
