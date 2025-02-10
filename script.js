@@ -8,18 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (percent <= 40) {
       const t = (percent - 10) / 30; // 10-40 -> 0-1
       const r = 255;
-      const g = Math.round(0 + t * (165 - 0)); // переход к оранжевому (255,165,0)
+      const g = Math.round(0 + t * (165 - 0));
       const b = 0;
       return `rgb(${r}, ${g}, ${b})`;
     } else if (percent <= 70) {
       const t = (percent - 40) / 30; // 40-70 -> 0-1
       const r = 255;
-      const g = Math.round(165 + t * (255 - 165)); // переход к жёлтому (255,255,0)
+      const g = Math.round(165 + t * (255 - 165));
       const b = 0;
       return `rgb(${r}, ${g}, ${b})`;
     } else {
       const t = (percent - 70) / 30; // 70-100 -> 0-1
-      const r = Math.round(255 - t * 255); // переход к зелёному (0,255,0)
+      const r = Math.round(255 - t * 255);
       const g = 255;
       const b = 0;
       return `rgb(${r}, ${g}, ${b})`;
