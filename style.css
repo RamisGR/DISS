@@ -24,7 +24,7 @@ body {
   --text-color: #f0f0f0;
 }
 
-/* Верхний тулбар с эффектом стекла, компактный и центрированный */
+/* Верхний тулбар с эффектом стекла, компактный, с расширенными отступами */
 #top-bar {
   position: fixed;
   top: 10px;
@@ -32,8 +32,8 @@ body {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
+  gap: 20px;
+  padding: 12px 24px;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -44,10 +44,11 @@ body {
 /* Контейнер для социальных иконок */
 #social-icons {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
-#telegram-link, #vk-link {
+#telegram-link, 
+#vk-link {
   text-decoration: none;
 }
 
@@ -63,7 +64,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Кнопка смены темы как простой текст */
+/* Кнопка смены темы как простой текст (с изменением цвета при hover) */
 #theme-toggle {
   background: none;
   border: none;
