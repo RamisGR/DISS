@@ -60,7 +60,7 @@ body {
   width: 34px;
   height: 34px;
   object-fit: contain;
-  margin-top: 2px;
+  margin-top: 1px;
   transition: transform 0.2s ease-in-out;
 }
 
