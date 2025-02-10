@@ -40,23 +40,22 @@ body {
   align-items: center;
 }
 
-/* Внутренний контейнер тулбара фиксированной ширины 500px (от центра до внешнего края = 250px) */
+/* Внутренний контейнер тулбара фиксированной ширины 500px */
 .top-bar-inner {
   width: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0; /* убраны внутренние отступы */
 }
 
-/* Блок социальных иконок – иконки выровнены по левому краю, уменьшен промежуток между ними */
+/* Блок социальных иконок с фиксированной шириной 82px */
 #social-icons {
+  width: 82px;
   display: flex;
   gap: 10px;
-  margin: 0;
-  padding: 0;
 }
 
+/* Иконки соцсетей */
 #telegram-link,
 #vk-link {
   text-decoration: none;
@@ -74,8 +73,10 @@ body {
   transform: scale(1.1);
 }
 
-/* Кнопка смены темы – выровнена по правому краю, оформлена как простой текст */
+/* Кнопка смены темы с фиксированной шириной 118px */
 #theme-toggle {
+  width: 118px;
+  text-align: right;
   background: none;
   border: none;
   outline: none;
@@ -84,8 +85,6 @@ body {
   font-weight: 300;
   cursor: pointer;
   transition: color 0.3s;
-  margin: 0;
-  padding: 0;
 }
 
 #theme-toggle:hover {
@@ -109,11 +108,13 @@ body {
   margin: 20px 0;
   text-align: left;
 }
+
 .progress-label {
   font-weight: bold;
   display: flex;
   justify-content: space-between;
 }
+
 .progress-bar {
   width: 100%;
   background-color: var(--bar-bg);
@@ -122,6 +123,7 @@ body {
   height: 20px;
   margin-top: 5px;
 }
+
 .progress {
   height: 100%;
   width: 0%;
