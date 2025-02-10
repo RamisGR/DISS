@@ -57,15 +57,15 @@ body {
 
 /* Иконка Telegram – уменьшаем до 34px, а иконка ВКонтакте оставляем 36px */
 #telegram-link img {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
   transition: transform 0.2s ease-in-out;
 }
 
 #vk-link img {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
   transition: transform 0.2s ease-in-out;
 }
