@@ -53,6 +53,7 @@ body {
   width: 82px;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 /* Иконка Telegram – уменьшаем до 34px, а иконка ВКонтакте оставляем 36px */
