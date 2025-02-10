@@ -55,16 +55,12 @@ body {
   gap: 10px;
 }
 
-/* Иконки соцсетей */
-#telegram-link,
-#vk-link {
-  text-decoration: none;
-}
-
+/* Иконки соцсетей – задаём одинаковые размеры и object-fit для корректного отображения */
 #telegram-link img,
 #vk-link img {
   width: 36px;
   height: 36px;
+  object-fit: contain;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -91,6 +87,22 @@ body {
   text-decoration: underline;
 }
 
+/* Медиа-запрос для экранов смартфонов */
+@media (max-width: 500px) {
+  .top-bar-inner {
+    width: 100%;
+    padding: 0 10px;
+  }
+  /* Уменьшаем gap между элементами для узких экранов */
+  #social-icons {
+    gap: 5px;
+  }
+  /* Снимаем фиксированную ширину кнопки, чтобы избежать упирания в край */
+  #theme-toggle {
+    width: auto;
+  }
+}
+
 /* Контейнеры блоков прогресса — в светлой теме без контуров */
 .container {
   max-width: 500px;
@@ -108,13 +120,11 @@ body {
   margin: 20px 0;
   text-align: left;
 }
-
 .progress-label {
   font-weight: bold;
   display: flex;
   justify-content: space-between;
 }
-
 .progress-bar {
   width: 100%;
   background-color: var(--bar-bg);
@@ -123,7 +133,6 @@ body {
   height: 20px;
   margin-top: 5px;
 }
-
 .progress {
   height: 100%;
   width: 0%;
