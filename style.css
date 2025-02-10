@@ -55,8 +55,14 @@ body {
   gap: 10px;
 }
 
-/* Иконки соцсетей – задаём одинаковые размеры и object-fit для корректного отображения */
-#telegram-link img,
+/* Иконка Telegram – уменьшаем до 34px, а иконка ВКонтакте оставляем 36px */
+#telegram-link img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+}
+
 #vk-link img {
   width: 36px;
   height: 36px;
