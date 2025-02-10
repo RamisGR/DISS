@@ -24,24 +24,24 @@ body {
   --text-color: #f0f0f0;
 }
 
-/* Верхний тулбар с эффектом стекла, компактный, с расширенными отступами */
+/* Верхний тулбар, растянутый на всю ширину, с эффектом стекла.
+   Внутренние отступы по бокам равны 500px (ширине контейнера .container) */
 #top-bar {
   position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  padding: 12px 24px;
+  padding: 8px 500px;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
   z-index: 1000;
 }
 
-/* Контейнер для социальных иконок */
+/* Блок социальных иконок – выравнивание влево */
 #social-icons {
   display: flex;
   gap: 20px;
@@ -64,7 +64,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Кнопка смены темы как простой текст (с изменением цвета при hover) */
+/* Кнопка смены темы как простой текст */
 #theme-toggle {
   background: none;
   border: none;
