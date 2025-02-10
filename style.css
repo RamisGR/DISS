@@ -24,24 +24,31 @@ body {
   --text-color: #f0f0f0;
 }
 
-/* Верхний тулбар, растянутый на всю ширину, с эффектом стекла.
-   Внутренние отступы по бокам равны 500px (ширине контейнера .container) */
+/* Верхний тулбар, растянутый на всю ширину, с эффектом стекла */
 #top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 500px;
+  height: 60px;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Блок социальных иконок – выравнивание влево */
+/* Внутренний контейнер тулбара фиксированной ширины 500px, т.е. от центра до внешнего края = 250px */
+.top-bar-inner {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Блок социальных иконок */
 #social-icons {
   display: flex;
   gap: 20px;
