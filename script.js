@@ -1,14 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Функция для интерполяции цвета по проценту
+  function getProgressColor(percent) {
+    if (percent <= 10) {
+      // От 0 до 10% — фиксированный красный
+      return "rgb(255, 0, 0)";
+    } else if (percent <= 40) {
+      // Интерполируем от красного (255,0,0) до оранжевого (255,165,0)
+      const t = (percent - 10) / 30; // 10-40 -> 0-1
+      const r = 255;
+      const g = Math.round(0 + t * (165 - 0));
+      const b = 0;
+      return `rgb(${r}, ${g}, ${b})`;
+    } else if (percent <= 70) {
+      // Интерполируем от оранжевого (255,165,0) до жёлтого (255,255,0)
+      const t = (percent - 40) / 30; // 40-70 -> 0-1
+      const r = 255;
+      const g = Math.round(165 + t * (255 - 165));
+      const b = 0;
+      return `rgb(${r}, ${g}, ${b})`;
+    } else {
+      // Интерполируем от жёлтого (255,255,0) до зелёного (0,255,0)
+      const t = (percent - 70) / 30; // 70-100 -> 0-1
+      const r = Math.round(255 - t * 255);
+      const g = 255;
+      const b = 0;
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+  }
+
   // Устанавливаем ширину и динамический цвет для каждого элемента .progress
   const progressBars = document.querySelectorAll(".progress");
   progressBars.forEach(bar => {
     const progressValue = parseInt(bar.getAttribute("data-progress"), 10);
     bar.style.width = progressValue + "%";
-    // Интерполяция цвета от красного (#ff0000) до зелёного (#00ff00)
-    const red = Math.round(255 - (progressValue * 2.55));
-    const green = Math.round(progressValue * 2.55);
-    const color = `rgb(${red}, ${green}, 0)`;
-    bar.style.background = color;
+    bar.style.background = getProgressColor(progressValue);
   });
 
   // Инициализация темы согласно localStorage и установка текста кнопки
