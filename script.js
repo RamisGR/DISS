@@ -143,11 +143,27 @@ function toggleTheme() {
   }
 }
 
-// --- Функции для GitHub авторизации ---
+// --- Функции для простой авторизации ---
+
+// Функция для создания хеша строки
+// Это простая реализация хеширования для демонстрации
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash.toString(16); // Преобразуем в шестнадцатеричную строку
+}
+
+// Хешированный пароль для доступа (это хеш от "admin123")
+// Вы можете заменить его на свой хеш, сгенерированный функцией simpleHash
+const ACCESS_PASSWORD_HASH = "d7f536a";
 
 // Проверяем статус авторизации
 function isAuthenticated() {
-  return localStorage.getItem('github_token') !== null;
+  return localStorage.getItem('authorized') === 'true';
 }
 
 // Проверяем статус авторизации и показываем соответствующие элементы
@@ -162,10 +178,8 @@ function checkAuthStatus() {
     adminControls.style.display = 'block';
     
     // Получаем информацию о пользователе
-    const username = localStorage.getItem('github_username');
-    if (username) {
-      document.getElementById('user-info').innerHTML = `Привет, ${username}!`;
-    }
+    const username = localStorage.getItem('username') || 'Администратор';
+    document.getElementById('user-info').innerHTML = `Привет, ${username}!`;
   } else {
     authBtn.style.display = 'block';
     logoutBtn.style.display = 'none';
@@ -173,65 +187,33 @@ function checkAuthStatus() {
   }
 }
 
-// Функция для инициирования GitHub OAuth
-function loginWithGitHub() {
-  // Создаем уникальный state для защиты от CSRF
-  const state = Math.random().toString(36).substring(2);
-  localStorage.setItem('oauth_state', state);
+// Функция для входа в систему
+function login() {
+  const password = prompt("Введите пароль для доступа к редактированию:");
   
-  // Замените YOUR_CLIENT_ID на ваш настоящий Client ID
-  const clientId = 'Iv23liinZAUOxQCyT0d0';
-  
-  // URL для перенаправления после авторизации
-  const redirectUri = encodeURIComponent(window.location.href);
-  
-  // Формируем URL для авторизации
-  const githubUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&scope=read:user`;
-  
-  // Перенаправляем пользователя на GitHub
-  window.location.href = githubUrl;
+  if (password) {
+    // Хешируем введенный пароль и сравниваем с сохраненным хешем
+    const passwordHash = simpleHash(password);
+    
+    if (passwordHash === ACCESS_PASSWORD_HASH) {
+      localStorage.setItem('authorized', 'true');
+      localStorage.setItem('username', 'Администратор');
+      checkAuthStatus();
+      showNotification('Вход выполнен успешно!', 'success');
+    } else {
+      showNotification('Неверный пароль!', 'error');
+    }
+  }
 }
 
 // Функция для выхода из системы
 function logout() {
-  localStorage.removeItem('github_token');
-  localStorage.removeItem('github_username');
+  localStorage.removeItem('authorized');
+  localStorage.removeItem('username');
   checkAuthStatus();
   
   // Показываем сообщение о выходе
   showNotification('Вы вышли из системы', 'info');
-}
-
-// Функция для обработки callback от GitHub
-function handleGitHubCallback() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code');
-  const state = urlParams.get('state');
-  const savedState = localStorage.getItem('oauth_state');
-  
-  // Удаляем параметры из URL
-  const newUrl = window.location.origin + window.location.pathname;
-  window.history.pushState({ path: newUrl }, '', newUrl);
-  
-  if (code && state && state === savedState) {
-    // Здесь должен быть запрос к серверной части или сервису для обмена кода на токен
-    // Поскольку это GitHub Pages, мы можем использовать сервис-посредник или GitHub Actions
-    
-    // Примечание: для полноценной реализации вам понадобится серверная часть
-    // Здесь упрощенная демонстрация для статического сайта
-    
-    // Имитация успешной авторизации (для демонстрации)
-    simulateSuccessfulAuth();
-  }
-}
-
-// Для демонстрации - имитируем успешную авторизацию
-function simulateSuccessfulAuth() {
-  localStorage.setItem('github_token', 'demo_token');
-  localStorage.setItem('github_username', 'Пользователь');
-  checkAuthStatus();
-  
-  showNotification('Авторизация успешна!', 'success');
 }
 
 // Функция для отображения уведомлений
@@ -249,9 +231,7 @@ function showNotification(message, type = 'info') {
   }, 3000);
 }
 
-// Проверяем, есть ли параметры авторизации в URL при загрузке
+// При загрузке проверяем статус авторизации
 window.onload = function() {
-  if (window.location.search.includes('code=')) {
-    handleGitHubCallback();
-  }
+  checkAuthStatus();
 };
