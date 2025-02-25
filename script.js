@@ -180,7 +180,7 @@ function loginWithGitHub() {
   localStorage.setItem('oauth_state', state);
   
   // Замените YOUR_CLIENT_ID на ваш настоящий Client ID
-  const clientId = 'YOUR_CLIENT_ID';
+  const clientId = 'Iv23liinZAUOxQCyT0d0';
   
   // URL для перенаправления после авторизации
   const redirectUri = encodeURIComponent(window.location.href);
