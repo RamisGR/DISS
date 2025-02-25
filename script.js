@@ -159,7 +159,7 @@ function simpleHash(str) {
 
 // Хешированный пароль для доступа (это хеш от "admin123")
 // Вы можете заменить его на свой хеш, сгенерированный функцией simpleHash
-const ACCESS_PASSWORD_HASH = "d7f536a";
+const ACCESS_PASSWORD_HASH = "3c0d7a78b";
 
 // Проверяем статус авторизации
 function isAuthenticated() {
