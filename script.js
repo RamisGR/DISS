@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
+// Основная инициализация при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("Страница загружена");
+  
   // Инициализируем данные из хранилища или используем значения по умолчанию
   initProjectData();
   
@@ -15,6 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Проверяем статус авторизации и показываем соответствующие элементы
   checkAuthStatus();
+  
+  // Добавляем обработчики событий для кнопок
+  document.getElementById("auth-button").addEventListener("click", login);
+  document.getElementById("logout-button").addEventListener("click", logout);
+  document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
 });
 
 // Функция для получения цвета прогресса
@@ -56,9 +64,8 @@ function renderProject(projectId, progressElementId, pagesElementId, statusEleme
   if (!container) return;
   
   // Очищаем контейнер перед обновлением
-  while (container.querySelector('.progress-container')) {
-    container.querySelector('.progress-container').remove();
-  }
+  const progressContainers = container.querySelectorAll('.progress-container');
+  progressContainers.forEach(element => element.remove());
   
   // Рендерим заголовок проекта
   let titleElement = container.querySelector('h1');
@@ -110,9 +117,13 @@ function renderProject(projectId, progressElementId, pagesElementId, statusEleme
   const statusElement = document.getElementById(statusElementId);
   statusElement.innerHTML = `Сейчас выполняется: ${project.currentTask} <span class="loading-animation"></span>`;
   
+  // Удаляем любые предыдущие обработчики событий перед добавлением новых
+  const newStatusElement = statusElement.cloneNode(true);
+  statusElement.parentNode.replaceChild(newStatusElement, statusElement);
+  
   // Если авторизован, добавляем возможность редактирования текущей задачи
   if (isAuthenticated()) {
-    statusElement.addEventListener('click', function() {
+    document.getElementById(statusElementId).addEventListener('click', function() {
       const newTask = prompt('Обновить текущую задачу:', project.currentTask);
       if (newTask !== null) {
         updateCurrentTask(projectId, newTask);
@@ -143,71 +154,66 @@ function toggleTheme() {
   }
 }
 
-// --- Функции для простой авторизации ---
-
-// Массив допустимых паролей - просто добавляйте пароли сюда
-const VALID_PASSWORDS = ["admin123", "123"];
-
-// Проверяем статус авторизации
+// --- ПРОСТАЯ СИСТЕМА АВТОРИЗАЦИИ ---
 function isAuthenticated() {
   return localStorage.getItem('authorized') === 'true';
 }
 
-// Проверяем статус авторизации и показываем соответствующие элементы
 function checkAuthStatus() {
+  console.log("Проверка статуса авторизации");
+  
   const authBtn = document.getElementById('auth-button');
   const logoutBtn = document.getElementById('logout-button');
   const adminControls = document.getElementById('admin-controls');
   
   if (isAuthenticated()) {
+    console.log("Пользователь авторизован");
     authBtn.style.display = 'none';
     logoutBtn.style.display = 'block';
     adminControls.style.display = 'block';
     
-    // Получаем информацию о пользователе
     const username = localStorage.getItem('username') || 'Администратор';
     document.getElementById('user-info').innerHTML = `Привет, ${username}!`;
   } else {
+    console.log("Пользователь не авторизован");
     authBtn.style.display = 'block';
     logoutBtn.style.display = 'none';
     adminControls.style.display = 'none';
+    document.getElementById('user-info').innerHTML = '';
   }
 }
 
-// Функция для входа в систему - максимально простая проверка
 function login() {
+  console.log("Попытка входа");
   const password = prompt("Введите пароль для доступа к редактированию:");
   
-  if (!password) return; // Пользователь отменил ввод
+  // Если пользователь нажал "Отмена"
+  if (password === null) return;
   
-  // Простая проверка на соответствие одному из паролей
-  if (VALID_PASSWORDS.includes(password)) {
+  // Простой массив паролей - для легкой настройки
+  const validPasswords = ['admin123', '123'];
+  
+  // Проверка пароля
+  if (validPasswords.includes(password)) {
+    console.log("Пароль верный");
     localStorage.setItem('authorized', 'true');
     localStorage.setItem('username', 'Администратор');
     checkAuthStatus();
+    renderProjectProgress(); // Перерисовываем проекты с интерактивностью
     showNotification('Вход выполнен успешно!', 'success');
   } else {
+    console.log("Пароль неверный:", password);
     showNotification('Неверный пароль!', 'error');
   }
 }
 
-// Функция для выхода из системы
 function logout() {
+  console.log("Выход из системы");
   localStorage.removeItem('authorized');
   localStorage.removeItem('username');
   checkAuthStatus();
+  renderProjectProgress(); // Перерисовываем проекты без интерактивности
   
-  // Показываем сообщение о выходе
-  showNotification('Вы вышли из системы', 'info');
-}
-
-// Функция для выхода из системы
-function logout() {
-  localStorage.removeItem('authorized');
-  localStorage.removeItem('username');
-  checkAuthStatus();
-  
-  // Показываем сообщение о выходе
   showNotification('Вы вышли из системы', 'info');
 }
 
@@ -225,8 +231,3 @@ function showNotification(message, type = 'info') {
     setTimeout(() => notification.remove(), 500);
   }, 3000);
 }
-
-// При загрузке проверяем статус авторизации
-window.onload = function() {
-  checkAuthStatus();
-};
