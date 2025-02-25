@@ -145,48 +145,60 @@ function toggleTheme() {
 
 // --- Функции для простой авторизации ---
 
-// Более стабильная функция для создания хеша строки
-function simpleHash(str) {
-  // Простая реализация хеширования для демонстрации
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  // Берем абсолютное значение и усекаем до фиксированной длины
-  return Math.abs(hash).toString(16).substring(0, 8);
+// Массив допустимых паролей - просто добавляйте пароли сюда
+const VALID_PASSWORDS = ["admin123", "123"];
+
+// Проверяем статус авторизации
+function isAuthenticated() {
+  return localStorage.getItem('authorized') === 'true';
 }
 
-// Хардкодируем правильное значение для "admin123" 
-// Это гарантирует, что пароль всегда будет работать
-function checkPassword(password) {
-  if (password === "admin123") {
-    return true;
-  }
+// Проверяем статус авторизации и показываем соответствующие элементы
+function checkAuthStatus() {
+  const authBtn = document.getElementById('auth-button');
+  const logoutBtn = document.getElementById('logout-button');
+  const adminControls = document.getElementById('admin-controls');
   
-  // Если это не "admin123", проверяем по хешу для возможности добавить другие пароли
-  const passwordHash = simpleHash(password);
-  return passwordHash === ACCESS_PASSWORD_HASH;
+  if (isAuthenticated()) {
+    authBtn.style.display = 'none';
+    logoutBtn.style.display = 'block';
+    adminControls.style.display = 'block';
+    
+    // Получаем информацию о пользователе
+    const username = localStorage.getItem('username') || 'Администратор';
+    document.getElementById('user-info').innerHTML = `Привет, ${username}!`;
+  } else {
+    authBtn.style.display = 'block';
+    logoutBtn.style.display = 'none';
+    adminControls.style.display = 'none';
+  }
 }
 
-// Хешированный пароль для доступа (хеш от "admin123")
-const ACCESS_PASSWORD_HASH = "be32";
-
-// Функция для входа в систему
+// Функция для входа в систему - максимально простая проверка
 function login() {
   const password = prompt("Введите пароль для доступа к редактированию:");
   
-  if (password) {
-    if (checkPassword(password)) {
-      localStorage.setItem('authorized', 'true');
-      localStorage.setItem('username', 'Администратор');
-      checkAuthStatus();
-      showNotification('Вход выполнен успешно!', 'success');
-    } else {
-      showNotification('Неверный пароль!', 'error');
-    }
+  if (!password) return; // Пользователь отменил ввод
+  
+  // Простая проверка на соответствие одному из паролей
+  if (VALID_PASSWORDS.includes(password)) {
+    localStorage.setItem('authorized', 'true');
+    localStorage.setItem('username', 'Администратор');
+    checkAuthStatus();
+    showNotification('Вход выполнен успешно!', 'success');
+  } else {
+    showNotification('Неверный пароль!', 'error');
   }
+}
+
+// Функция для выхода из системы
+function logout() {
+  localStorage.removeItem('authorized');
+  localStorage.removeItem('username');
+  checkAuthStatus();
+  
+  // Показываем сообщение о выходе
+  showNotification('Вы вышли из системы', 'info');
 }
 
 // Функция для выхода из системы
