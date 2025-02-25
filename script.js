@@ -171,7 +171,7 @@ function checkPassword(password) {
 }
 
 // Хешированный пароль для доступа (хеш от "admin123")
-const ACCESS_PASSWORD_HASH = "3c0d7a78b";
+const ACCESS_PASSWORD_HASH = "be32";
 
 // Функция для входа в систему
 function login() {
