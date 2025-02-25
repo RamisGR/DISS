@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Прогресс проектов</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/check-all.png">
+  <meta name="description" content="Трекер прогресса научных работ, диссертаций и статей">
+</head>
+<body>
+
+  <!-- Верхний тулбар с эффектом стекла -->
+  <header id="top-bar">
+    <div class="top-bar-inner">
+      <div id="social-icons">
+        <a href="https://t.me/ramgade01" target="_blank" id="telegram-link" aria-label="Связаться через Telegram">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" loading="lazy">
+        </a>
+        <a href="https://vk.com/rrramisg" target="_blank" id="vk-link" aria-label="Связаться через ВКонтакте">
+          <img src="https://cdn-icons-png.flaticon.com/512/3670/3670055.png" alt="VK" loading="lazy">
+        </a>
+      </div>
+      
+      <div class="auth-container">
+        <span id="user-info"></span>
+        <button id="auth-button" onclick="loginWithGitHub()">Войти через GitHub</button>
+        <button id="logout-button" onclick="logout()" style="display: none;">Выйти</button>
+        <button id="theme-toggle" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Прогресс диссертации -->
+    <div class="container" id="dissertation-container">
+      <!-- Контент будет заполнен с помощью JavaScript -->
+      <h2 id="dissertation-progress">Диссертация готова на 0%</h2>
+      <p id="page-count">0 из 120 стр.</p>
+      <p id="dissertation-status-text">Загрузка...</p>
+      <p id="dissertation-progress-change" class="progress-change">Прогресс за последние 24 часа: <span class="no-change">0%</span></p>
+    </div>
+    
+    <!-- Прогресс статьи №1 -->
+    <div class="container" id="article1-container">
+      <!-- Контент будет заполнен с помощью JavaScript -->
+      <h2 id="article1-progress">Статья №1 готова на 0%</h2>
+      <p id="article1-page-count">0 из 20 стр.</p>
+      <p id="article1-status-text">Загрузка...</p>
+      <p id="article1-progress-change" class="progress-change">Прогресс за последние 24 часа: <span class="no-change">0%</span></p>
+    </div>
+    
+    <!-- Прогресс статьи №2 -->
+    <div class="container" id="article2-container">
+      <!-- Контент будет заполнен с помощью JavaScript -->
+      <h2 id="article2-progress">Статья №2 готова на 0%</h2>
+      <p id="article2-page-count">0 из 20 стр.</p>
+      <p id="article2-status-text">Загрузка...</p>
+      <p id="article2-progress-change" class="progress-change">Прогресс за последние 24 часа: <span class="no-change">0%</span></p>
+    </div>
+    
+    <!-- Панель администратора - отображается только для авторизованных пользователей -->
+    <div class="container" id="admin-controls">
+      <h3>Управление прогрессом</h3>
+      <p>Для редактирования прогресса просто нажмите на название секции.</p>
+      <p>Для обновления текущей задачи нажмите на текст "Сейчас выполняется..."</p>
+    </div>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

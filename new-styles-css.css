@@ -1,0 +1,408 @@
+/* Плавная прокрутка */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Глобальные стили (системные шрифты в стиле Apple) */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+  padding-top: 100px; /* Отступ для учёта фиксированного тулбара */
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Цветовые переменные для светлой и тёмной темы */
+:root {
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --bar-bg: #eaeaea;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --hover-color: #f5f5f5;
+  --primary-color: #5436da;
+  --secondary-color: #8a3ffc;
+  --success-color: #36b37e;
+  --warning-color: #ffab00;
+  --danger-color: #ff5630;
+  --blur-bg: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode {
+  --bg-color: #0f1116;
+  --card-bg: #1e1e2e;
+  --text-color: #e1e1e6;
+  --bar-bg: #313244;
+  --border-color: #2e2e42;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --hover-color: #2b2b40;
+  --primary-color: #9e86ff;
+  --secondary-color: #bb9af7;
+  --success-color: #78dba9;
+  --warning-color: #ffcc66;
+  --danger-color: #f7768e;
+  --blur-bg: rgba(30, 30, 46, 0.8);
+}
+
+/* Верхний тулбар, растянутый на всю ширину, с эффектом стекла */
+#top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--blur-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 10px var(--shadow-color);
+}
+
+/* Внутренний контейнер тулбара фиксированной ширины 500px */
+.top-bar-inner {
+  width: 550px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+/* Блок социальных иконок с фиксированной шириной */
+#social-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Иконки соц.сетей */
+#social-icons a img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: grayscale(30%);
+}
+
+#social-icons a:hover img {
+  transform: scale(1.2);
+  filter: grayscale(0%);
+}
+
+/* Кнопка смены темы */
+#theme-toggle {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+#theme-toggle:hover {
+  opacity: 1;
+  background-color: var(--hover-color);
+}
+
+/* Контейнеры блоков прогресса */
+.container {
+  max-width: 550px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 16px;
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.container h1 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.container h2 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/* Прогресс-бары */
+.progress-container {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.progress-label {
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.progress-label:hover {
+  color: var(--primary-color);
+}
+
+.percent {
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: var(--bar-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 12px;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-size: 30px 30px;
+  background-image: linear-gradient(
+    45deg, 
+    rgba(255, 255, 255, 0.15) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    rgba(255, 255, 255, 0.15) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  animation: progress-animation 1s linear infinite;
+}
+
+@keyframes progress-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 0;
+  }
+}
+
+/* Стили для "Сейчас выполняется" */
+#dissertation-status-text,
+#article1-status-text,
+#article2-status-text {
+  font-style: italic;
+  font-size: 15px;
+  margin-top: 5px;
+  color: var(--text-color);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#dissertation-status-text:hover,
+#article1-status-text:hover,
+#article2-status-text:hover {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+/* Анимация загрузки */
+.loading-animation {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.loading-animation::after {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  border-color: var(--primary-color) transparent var(--primary-color) transparent;
+  animation: loading-spin 1.2s linear infinite;
+}
+
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Стили для "Прогресс за последние 24 часа" */
+.progress-change {
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--hover-color);
+  display: inline-block;
+}
+
+.positive-change {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.negative-change {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.no-change {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Стили для авторизации */
+.auth-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+#auth-button, #logout-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+#auth-button:hover, #logout-button:hover {
+  background-color: var(--secondary-color);
+}
+
+#logout-button {
+  background-color: var(--bar-bg);
+  color: var(--text-color);
+}
+
+#user-info {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+#admin-controls {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--hover-color);
+  border-radius: 10px;
+  text-align: left;
+  display: none;
+}
+
+#admin-controls h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+/* Уведомления */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  z-index: 1001;
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification.success {
+  border-left: 4px solid var(--success-color);
+}
+
+.notification.info {
+  border-left: 4px solid var(--primary-color);
+}
+
+.notification.warning {
+  border-left: 4px solid var(--warning-color);
+}
+
+.notification.error {
+  border-left: 4px solid var(--danger-color);
+}
+
+.notification.hide {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+    margin: 30px 15px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .top-bar-inner {
+    width: 100%;
+    padding: 0 15px;
+  }
+  
+  .progress-container {
+    margin: 15px 0;
+  }
+  
+  .progress-label {
+    font-size: 14px;
+  }
+  
+  #social-icons {
+    gap: 8px;
+  }
+  
+  #social-icons a img {
+    width: 24px;
+    height: 24px;
+  }
+}
